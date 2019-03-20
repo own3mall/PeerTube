@@ -16,6 +16,7 @@ export class SignupComponent extends FormReactive implements OnInit {
   signupDone = false
   recaptchaRequired = false
   recaptchaSiteKey = ""
+  recaptchaSecretKey = ""
 
   constructor (
     protected formValidatorService: FormValidatorService,
@@ -50,8 +51,10 @@ export class SignupComponent extends FormReactive implements OnInit {
       terms: this.userValidatorsService.USER_TERMS
     })
     
+    // Recaptcha vars
     recaptchaRequired = this.requiresRecaptcha
     recaptchaSiteKey = this.serverService.getConfig().recaptchaForm.recaptchaSiteKey
+    recaptchaSecretKey = this.serverService.getConfig().recaptchaForm.recaptchaSecretKey
   }
 
   signup () {
@@ -61,21 +64,24 @@ export class SignupComponent extends FormReactive implements OnInit {
     const userCreate: UserCreate = this.form.value
     
     if (this.recaptchaRequired) {
-		// Validate captcha
-		var reCAPTCHA = require('recaptcha2');
-	 
-		var recaptcha = new reCAPTCHA({
-		  siteKey: this.serverService.getConfig().recaptchaForm.recaptchaSiteKey,
-		  secretKey: this.serverService.getConfig().recaptchaForm.recaptchaSecretKey
-		});
-		
-		recaptcha.validate(userCreate.g-recaptcha-response).then(function(){
+		if(userCreate.g-recaptcha-response){
+			// Validate captcha
+			var reCAPTCHA = require('recaptcha2');
+		 
+			var recaptcha = new reCAPTCHA({
+			  siteKey: this.recaptchaSiteKey,
+			  secretKey: this.recaptchaSecretKey
+			});
 			
-		}).catch(function(errorCodes){
-			// invalid
+			recaptcha.validate(userCreate.g-recaptcha-response).then(function(){
+				
+			}).catch(function(errorCodes){
+				// invalid
+				continue = false
+			});
+		}else{
 			continue = false
-		});
-		
+		}
 	}
 
 	if (continue){
