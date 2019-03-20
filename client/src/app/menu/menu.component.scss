@@ -43,6 +43,9 @@ menu {
       @include ellipsis;
 
       flex-grow: 1;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
 
       .logged-in-display-name {
         font-size: 16px;
@@ -55,7 +58,6 @@ menu {
 
       .logged-in-username {
         @include ellipsis;
-
         font-size: 13px;
         color: #C6C6C6;
         max-width: 140px;

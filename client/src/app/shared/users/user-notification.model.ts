@@ -118,7 +118,6 @@ export class UserNotification implements UserNotificationServer {
         case UserNotificationType.MY_VIDEO_IMPORT_SUCCESS:
           this.videoImportUrl = this.buildVideoImportUrl()
           this.videoImportIdentifier = this.buildVideoImportIdentifier(this.videoImport)
-
           if (this.videoImport.video) this.videoUrl = this.buildVideoUrl(this.videoImport.video)
           break
 
