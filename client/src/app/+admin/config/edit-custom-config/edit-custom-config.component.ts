@@ -108,6 +108,11 @@ export class EditCustomConfigComponent extends FormReactive implements OnInit {
       contactForm: {
         enabled: null
       },
+      recaptchaForm: {
+        enabled: null,
+        recaptchaSiteKey: null,
+        recaptchaSecretKey: null
+      },
       user: {
         videoQuota: this.userValidatorsService.USER_VIDEO_QUOTA,
         videoQuotaDaily: this.userValidatorsService.USER_VIDEO_QUOTA_DAILY

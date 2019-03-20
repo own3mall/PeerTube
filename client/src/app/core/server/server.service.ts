@@ -47,6 +47,11 @@ export class ServerService {
     contactForm: {
       enabled: false
     },
+    recaptchaForm: {
+      enabled: false,
+      recaptchaSiteKey: '',
+      recaptchaSecretKey: ''
+    },
     serverVersion: 'Unknown',
     signup: {
       allowed: false,

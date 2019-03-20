@@ -138,6 +138,7 @@
     "pfeed": "^1.1.6",
     "pg": "^7.4.1",
     "prompt": "^1.0.0",
+    "recaptcha2": "1.3.3",
     "redis": "^2.8.0",
     "reflect-metadata": "^0.1.12",
     "request": "^2.81.0",

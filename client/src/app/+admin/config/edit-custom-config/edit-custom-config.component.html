@@ -178,6 +178,26 @@
             i18n-labelText labelText="Enable contact form"
           ></my-peertube-checkbox>
         </div>
+        
+        <div i18n class="inner-form-title">Google Recaptcha</div>
+        <div class="form-group" formGroupName="recaptchaForm">
+          <my-peertube-checkbox
+            inputName="enableRecaptcha" formControlName="enabled"
+            i18n-labelText labelText="Enable Google Recaptcha"
+          ></my-peertube-checkbox>
+          
+          <label i18n for="recaptchaSiteKey">Site key</label>
+            <input
+              type="text" id="recaptchaSiteKey"
+              formControlName="siteKey"
+            >
+            
+          <label i18n for="recaptchaSecretKey">Secret key</label>
+            <input
+              type="text" id="recaptchaSecretKey"
+              formControlName="secretKey"
+            >
+        </div>
 
       </ng-template>
     </ngb-tab>
