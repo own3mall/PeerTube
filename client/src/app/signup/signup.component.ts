@@ -59,34 +59,11 @@ export class SignupComponent extends FormReactive implements OnInit {
 
   signup () {
     this.error = null
-    continue = true
 
     const userCreate: UserCreate = this.form.value
-    
-    if (this.recaptchaRequired) {
-		if(userCreate.g-recaptcha-response){
-			// Validate captcha
-			var reCAPTCHA = require('recaptcha2');
-		 
-			var recaptcha = new reCAPTCHA({
-			  siteKey: this.recaptchaSiteKey,
-			  secretKey: this.recaptchaSecretKey
-			});
-			
-			recaptcha.validate(userCreate.g-recaptcha-response).then(function(){
-				
-			}).catch(function(errorCodes){
-				// invalid
-				continue = false
-			});
-		}else{
-			continue = false
-		}
-	}
 
-	if (continue){
-		this.userService.signup(userCreate).subscribe(
-		  () => {
+	this.userService.signup(userCreate).subscribe(
+		() => {
 			this.signupDone = true
 
 			if (this.requiresEmailVerification) {
@@ -105,12 +82,8 @@ export class SignupComponent extends FormReactive implements OnInit {
 
 				  err => this.error = err.message
 				)
-		  },
-
-		  err => this.error = err.message
-		)
-	}else{
-		err => this.error = "Failed to verify that you are a human."
-	}
+		},
+		err => this.error = err.message
+	)
   }
 }

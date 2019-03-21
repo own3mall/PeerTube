@@ -43,6 +43,7 @@ import { myVideosHistoryRouter } from './my-history'
 import { myNotificationsRouter } from './my-notifications'
 import { Notifier } from '../../../lib/notifier'
 import { mySubscriptionsRouter } from './my-subscriptions'
+import { ServerService } from '@app/core'
 
 const auditLogger = auditLoggerFactory('users')
 
@@ -195,30 +196,58 @@ async function createUser (req: express.Request, res: express.Response) {
 async function registerUser (req: express.Request, res: express.Response) {
   const body: UserCreate = req.body
 
-  const userToCreate = new UserModel({
-    username: body.username,
-    password: body.password,
-    email: body.email,
-    nsfwPolicy: CONFIG.INSTANCE.DEFAULT_NSFW_POLICY,
-    autoPlayVideo: true,
-    role: UserRole.USER,
-    videoQuota: CONFIG.USER.VIDEO_QUOTA,
-    videoQuotaDaily: CONFIG.USER.VIDEO_QUOTA_DAILY,
-    emailVerified: CONFIG.SIGNUP.REQUIRES_EMAIL_VERIFICATION ? false : null
-  })
+  continue = true
 
-  const { user } = await createUserAccountAndChannelAndPlaylist(userToCreate)
-
-  auditLogger.create(body.username, new UserAuditView(user.toFormattedJSON()))
-  logger.info('User %s with its channel and account registered.', body.username)
-
-  if (CONFIG.SIGNUP.REQUIRES_EMAIL_VERIFICATION) {
-    await sendVerifyUserEmail(user)
+  if (ServerService.getConfig().recaptchaForm.recaptchaRequired && ServerService.getConfig().recaptchaForm.recaptchaSiteKey && ServerService.getConfig().recaptchaForm.recaptchaSecretKey) {
+	if(body.g-recaptcha-response){
+		// Validate captcha
+		var reCAPTCHA = require('recaptcha2');
+		 
+		var recaptcha = new reCAPTCHA({
+		  siteKey: ServerService.getConfig().recaptchaForm.recaptchaSiteKey,
+		  secretKey: ServerService.getConfig().recaptchaForm.recaptchaSecretKey
+		});
+			
+		recaptcha.validate(body.g-recaptcha-response).then(function(){
+				
+		}).catch(function(errorCodes){
+			// invalid
+			continue = false
+		});
+	}else{
+		continue = false
+	}
   }
+  
+  if(continue){
 
-  Notifier.Instance.notifyOnNewUserRegistration(user)
+	  const userToCreate = new UserModel({
+		username: body.username,
+		password: body.password,
+		email: body.email,
+		nsfwPolicy: CONFIG.INSTANCE.DEFAULT_NSFW_POLICY,
+		autoPlayVideo: true,
+		role: UserRole.USER,
+		videoQuota: CONFIG.USER.VIDEO_QUOTA,
+		videoQuotaDaily: CONFIG.USER.VIDEO_QUOTA_DAILY,
+		emailVerified: CONFIG.SIGNUP.REQUIRES_EMAIL_VERIFICATION ? false : null
+	  })
 
-  return res.type('json').status(204).end()
+	  const { user } = await createUserAccountAndChannelAndPlaylist(userToCreate)
+
+	  auditLogger.create(body.username, new UserAuditView(user.toFormattedJSON()))
+	  logger.info('User %s with its channel and account registered.', body.username)
+
+	  if (CONFIG.SIGNUP.REQUIRES_EMAIL_VERIFICATION) {
+		await sendVerifyUserEmail(user)
+	  }
+
+	  Notifier.Instance.notifyOnNewUserRegistration(user)
+
+	  return res.type('json').status(204).end()
+   }
+   
+   return res.type('json').status(401).end()
 }
 
 async function unblockUser (req: express.Request, res: express.Response, next: express.NextFunction) {
