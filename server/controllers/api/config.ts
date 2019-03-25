@@ -71,6 +71,11 @@ async function getConfig (req: express.Request, res: express.Response) {
     contactForm: {
       enabled: CONFIG.CONTACT_FORM.ENABLED
     },
+    recaptchaForm: {
+      enabled: CONFIG.RECAPTCHA_FORM.ENABLED,
+      recaptchaSiteKey: CONFIG.RECAPTCHA_FORM.SITEKEY,
+      recaptchaSecretKey: CONFIG.RECAPTCHA_FORM.PRIVKEY
+    },
     serverVersion: packageJSON.version,
     serverCommit,
     signup: {
@@ -236,6 +241,11 @@ function customConfig (): CustomConfig {
     },
     contactForm: {
       enabled: CONFIG.CONTACT_FORM.ENABLED
+    },
+    recaptchaForm: {
+      enabled: CONFIG.RECAPTCHA_FORM.ENABLED,
+      recaptchaSiteKey: CONFIG.RECAPTCHA_FORM.SITEKEY,
+      recaptchaSecretKey: CONFIG.RECAPTCHA_FORM.PRIVKEY
     },
     user: {
       videoQuota: CONFIG.USER.VIDEO_QUOTA,

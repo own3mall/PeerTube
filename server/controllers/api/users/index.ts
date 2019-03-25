@@ -44,7 +44,6 @@ import { myVideosHistoryRouter } from './my-history'
 import { myNotificationsRouter } from './my-notifications'
 import { Notifier } from '../../../lib/notifier'
 import { mySubscriptionsRouter } from './my-subscriptions'
-import { ServerService } from '@app/core'
 
 const auditLogger = auditLoggerFactory('users')
 
@@ -199,14 +198,14 @@ async function registerUser (req: express.Request, res: express.Response) {
 
   let continu = true
 
-  if (ServerService.getConfig().recaptchaForm.recaptchaRequired && ServerService.getConfig().recaptchaForm.recaptchaSiteKey && ServerService.getConfig().recaptchaForm.recaptchaSecretKey) {
+  if (CONFIG.RECAPTCHA_FORM.ENABLED && CONFIG.RECAPTCHA_FORM.SITEKEY && CONFIG.RECAPTCHA_FORM.PRIVKEY) {
 	if(body["g-recaptcha-response"]){
 		// Validate captcha
 		var reCAPTCHA = require('recaptcha2');
 		 
 		var recaptcha = new reCAPTCHA({
-		  siteKey: ServerService.getConfig().recaptchaForm.recaptchaSiteKey,
-		  secretKey: ServerService.getConfig().recaptchaForm.recaptchaSecretKey
+		  siteKey: CONFIG.RECAPTCHA_FORM.SITEKEY,
+		  secretKey: CONFIG.RECAPTCHA_FORM.PRIVKEY
 		});
 			
 		recaptcha.validate(body["g-recaptcha-response"]).then(function(){

@@ -45,6 +45,12 @@ export interface CustomConfig {
   contactForm: {
     enabled: boolean
   }
+  
+  recaptchaForm: {
+      enabled: boolean
+      recaptchaSiteKey: string
+      recaptchaSecretKey: string
+  }
 
   user: {
     videoQuota: number

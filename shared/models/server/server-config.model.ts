@@ -23,6 +23,12 @@ export interface ServerConfig {
   contactForm: {
     enabled: boolean
   }
+  
+  recaptchaForm: {
+      enabled: boolean
+      recaptchaSiteKey: string
+      recaptchaSecretKey: string
+  }
 
   signup: {
     allowed: boolean,

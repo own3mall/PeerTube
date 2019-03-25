@@ -244,6 +244,11 @@ const CONFIG = {
   CONTACT_FORM: {
     get ENABLED () { return config.get<boolean>('contact_form.enabled') }
   },
+  RECAPTCHA_FORM:{
+	 get ENABLED () { return config.get<boolean>('recaptcha_form.enabled') },
+	 get SITEKEY () { return config.get<string>('recaptcha_form.recaptcha_site_key') },
+	 get PRIVKEY () { return config.get<string>('recaptcha_form.recaptcha_secret_key') }
+  },
   SIGNUP: {
     get ENABLED () { return config.get<boolean>('signup.enabled') },
     get LIMIT () { return config.get<number>('signup.limit') },
