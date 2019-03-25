@@ -84,10 +84,10 @@ function updateCustomSubConfig (url: string, token: string, newConfig: any) {
     contactForm: {
       enabled: true
     },
-    recaptcha_form: {
+    recaptchaForm: {
 		enabled: false,
-		recaptcha_site_key: '',
-		recaptcha_secret_key: ''
+		recaptchaSiteKey: '',
+		recaptchaSecretKey: ''
 	},
     user: {
       videoQuota: 5242881,

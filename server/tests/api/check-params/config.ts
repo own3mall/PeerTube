@@ -52,10 +52,10 @@ describe('Test config API validators', function () {
     contactForm: {
       enabled: false
     },
-    recaptcha_form: {
+    recaptchaForm: {
 		enabled: false,
-		recaptcha_site_key: '',
-		recaptcha_secret_key: ''
+		recaptchaSiteKey: '',
+		recaptchaSecretKey: ''
 	},
     user: {
       videoQuota: 5242881,
