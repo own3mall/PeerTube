@@ -26,7 +26,8 @@ export class SignupComponent extends FormReactive implements OnInit {
     private userService: UserService,
     private serverService: ServerService,
     private redirectService: RedirectService,
-    private i18n: I18n
+    private i18n: I18n,
+    private elementRef:ElementRef
   ) {
     super()
   }
