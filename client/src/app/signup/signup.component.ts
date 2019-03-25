@@ -40,7 +40,7 @@ export class SignupComponent extends FormReactive implements OnInit {
   }
   
   get requiresRecaptcha () {
-    return this.serverService.getConfig().recaptchaForm.enabled && this.serverService.getConfig().recaptchaForm.recaptchaSiteKey && this.serverService.getConfig().recaptchaForm.recaptchaSecretKey
+    return this.serverService.getConfig().recaptchaForm.enabled && this.serverService.getConfig().recaptchaForm.recaptchaSiteKey != '' && this.serverService.getConfig().recaptchaForm.recaptchaSecretKey != ''
   }
 
   ngOnInit () {
