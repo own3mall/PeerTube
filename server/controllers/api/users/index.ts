@@ -198,7 +198,7 @@ async function registerUser (req: express.Request, res: express.Response) {
 
   let continu = true
 
-  if (CONFIG.RECAPTCHA_FORM.ENABLED && CONFIG.RECAPTCHA_FORM.SITEKEY && CONFIG.RECAPTCHA_FORM.PRIVKEY) {
+  if (CONFIG.RECAPTCHA_FORM.ENABLED && CONFIG.RECAPTCHA_FORM.SITEKEY != '' && CONFIG.RECAPTCHA_FORM.PRIVKEY != '') {
 	if(body["g-recaptcha-response"] != ''){
 		// Validate captcha
 		var reCAPTCHA = require('recaptcha2');
