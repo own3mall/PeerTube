@@ -196,7 +196,7 @@ async function createUser (req: express.Request, res: express.Response) {
 async function registerUser (req: express.Request, res: express.Response) {
   const body: UserCreate = req.body
 
-  let continue = true;
+  let continu = true
 
   if (ServerService.getConfig().recaptchaForm.recaptchaRequired && ServerService.getConfig().recaptchaForm.recaptchaSiteKey && ServerService.getConfig().recaptchaForm.recaptchaSecretKey) {
 	if(body.g-recaptcha-response){
@@ -212,14 +212,14 @@ async function registerUser (req: express.Request, res: express.Response) {
 				
 		}).catch(function(errorCodes){
 			// invalid
-			continue = false
+			continu = false
 		});
 	}else{
-		continue = false
+		continu = false
 	}
   }
   
-  if(continue || userHasPermission(UserRight.MANAGE_USERS)){ // Skip recaptcha if admin
+  if(continu || userHasPermission(UserRight.MANAGE_USERS)){ // Skip recaptcha if admin
 
 	  const userToCreate = new UserModel({
 		username: body.username,
