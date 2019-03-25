@@ -15,8 +15,8 @@ export class SignupComponent extends FormReactive implements OnInit {
   error: string = null
   signupDone = false
   recaptchaRequired = false
-  recaptchaSiteKey = ""
-  recaptchaSecretKey = ""
+  recaptchaSiteKey: string = null
+  recaptchaSecretKey: string = null
 
   constructor (
     protected formValidatorService: FormValidatorService,
