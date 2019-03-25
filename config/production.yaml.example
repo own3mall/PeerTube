@@ -128,6 +128,11 @@ admin:
 
 contact_form:
   enabled: true
+  
+recaptcha_form:
+  enabled: false
+  recaptcha_site_key: ''
+  recaptcha_secret_key: ''
 
 signup:
   enabled: false
