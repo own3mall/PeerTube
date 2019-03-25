@@ -196,10 +196,10 @@ async function createUser (req: express.Request, res: express.Response) {
 async function registerUser (req: express.Request, res: express.Response) {
   const body: UserCreate = req.body
 
-  let continu = true
+  var continu = true
 
   if (CONFIG.RECAPTCHA_FORM.ENABLED && CONFIG.RECAPTCHA_FORM.SITEKEY != '' && CONFIG.RECAPTCHA_FORM.PRIVKEY != '') {
-	if(body["g-recaptcha-response"] != ''){
+	if(body["g-recaptcha-response"]){
 		// Validate captcha
 		var reCAPTCHA = require('recaptcha2');
 		 
@@ -219,7 +219,7 @@ async function registerUser (req: express.Request, res: express.Response) {
 	}
   }
   
-  if(continu || userHasPermission(UserRight.MANAGE_USERS)){ // Skip recaptcha if admin
+  if(continu || (res.locals.oauth.token && userHasPermission(UserRight.MANAGE_USERS))){ // Skip recaptcha if admin
 
 	  const userToCreate = new UserModel({
 		username: body.username,
@@ -247,7 +247,7 @@ async function registerUser (req: express.Request, res: express.Response) {
 	  return res.type('json').status(204).end()
    }
    
-   return res.type('json').status(401).end()
+   return res.status(401).send('Recaptcha required!')
 }
 
 async function unblockUser (req: express.Request, res: express.Response, next: express.NextFunction) {
