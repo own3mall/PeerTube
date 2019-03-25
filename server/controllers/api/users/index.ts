@@ -12,6 +12,7 @@ import {
   asyncRetryTransactionMiddleware,
   authenticate,
   ensureUserHasRight,
+  userHasPermission,
   ensureUserRegistrationAllowed,
   ensureUserRegistrationAllowedForIP,
   paginationValidator,
@@ -199,7 +200,7 @@ async function registerUser (req: express.Request, res: express.Response) {
   let continu = true
 
   if (ServerService.getConfig().recaptchaForm.recaptchaRequired && ServerService.getConfig().recaptchaForm.recaptchaSiteKey && ServerService.getConfig().recaptchaForm.recaptchaSecretKey) {
-	if(body.g-recaptcha-response){
+	if(body["g-recaptcha-response"]){
 		// Validate captcha
 		var reCAPTCHA = require('recaptcha2');
 		 
@@ -208,7 +209,7 @@ async function registerUser (req: express.Request, res: express.Response) {
 		  secretKey: ServerService.getConfig().recaptchaForm.recaptchaSecretKey
 		});
 			
-		recaptcha.validate(body.g-recaptcha-response).then(function(){
+		recaptcha.validate(body["g-recaptcha-response"]).then(function(){
 				
 		}).catch(function(errorCodes){
 			// invalid

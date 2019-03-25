@@ -7,4 +7,5 @@ export interface UserCreate {
   videoQuota: number
   videoQuotaDaily: number
   role: UserRole
+  "g-recaptcha-response": string
 }
