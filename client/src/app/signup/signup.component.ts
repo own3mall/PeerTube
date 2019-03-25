@@ -52,9 +52,9 @@ export class SignupComponent extends FormReactive implements OnInit {
     })
     
     // Recaptcha vars
-    recaptchaRequired = this.requiresRecaptcha
-    recaptchaSiteKey = this.serverService.getConfig().recaptchaForm.recaptchaSiteKey
-    recaptchaSecretKey = this.serverService.getConfig().recaptchaForm.recaptchaSecretKey
+    this.recaptchaRequired = this.requiresRecaptcha
+    this.recaptchaSiteKey = this.serverService.getConfig().recaptchaForm.recaptchaSiteKey
+    this.recaptchaSecretKey = this.serverService.getConfig().recaptchaForm.recaptchaSecretKey
   }
 
   signup () {
