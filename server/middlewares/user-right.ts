@@ -22,8 +22,20 @@ function ensureUserHasRight (userRight: UserRight) {
   }
 }
 
+function userHasPermission (userRight: UserRight) {
+  return function (req: express.Request, res: express.Response, next: express.NextFunction) {
+    const user = res.locals.oauth.token.user as UserModel
+    if (user.hasRight(userRight) === false) {
+       return false
+    }
+
+    return true
+  }
+}
+
 // ---------------------------------------------------------------------------
 
 export {
-  ensureUserHasRight
+  ensureUserHasRight,
+  userHasPermission
 }
