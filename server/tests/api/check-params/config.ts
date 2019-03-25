@@ -52,6 +52,11 @@ describe('Test config API validators', function () {
     contactForm: {
       enabled: false
     },
+    recaptcha_form: {
+		enabled: false,
+		recaptcha_site_key: '',
+		recaptcha_secret_key: ''
+	},
     user: {
       videoQuota: 5242881,
       videoQuotaDaily: 318742
