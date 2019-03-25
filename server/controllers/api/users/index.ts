@@ -196,7 +196,7 @@ async function createUser (req: express.Request, res: express.Response) {
 async function registerUser (req: express.Request, res: express.Response) {
   const body: UserCreate = req.body
 
-  continue = true
+  var continue = true
 
   if (ServerService.getConfig().recaptchaForm.recaptchaRequired && ServerService.getConfig().recaptchaForm.recaptchaSiteKey && ServerService.getConfig().recaptchaForm.recaptchaSecretKey) {
 	if(body.g-recaptcha-response){
