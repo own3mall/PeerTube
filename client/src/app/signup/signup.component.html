@@ -51,7 +51,7 @@
       
        <div *ngIf="recaptchaRequired" class="form-group">
 		<label for="recaptcha" i18n>Verify You Are Human</label>
-        <div id="recaptcha" class="g-recaptcha googleRecaptchaV2" data-sitekey="{{ recaptchaSiteKey }}"></div>
+        <div id="recaptcha" class="g-recaptcha googleRecaptchaV2" [attr.data-sitekey]="recaptchaSiteKey"></div>
       </div>
 
       <div class="form-group form-group-terms">
