@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core'
+import { Component, OnInit, ElementRef } from '@angular/core'
 import { AuthService, Notifier, RedirectService, ServerService } from '@app/core'
 import { UserCreate } from '../../../../shared'
 import { FormReactive, UserService, UserValidatorsService } from '../shared'
