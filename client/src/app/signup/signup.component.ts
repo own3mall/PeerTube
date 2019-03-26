@@ -73,7 +73,7 @@ export class SignupComponent extends FormReactive implements OnInit {
     let userCreate: UserCreate = this.form.value
     
     if(this.recaptchaRequired){
-		userCreate["g-recaptcha-response"] = document.getElementById('g-recaptcha-response').value
+		userCreate["g-recaptcha-response"] = (document.getElementById('g-recaptcha-response') as HTMLInputElement).value
     }
 
 	this.userService.signup(userCreate).subscribe(
