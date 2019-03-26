@@ -15,7 +15,6 @@ export class UserValidatorsService {
   readonly USER_DISPLAY_NAME: BuildFormValidator
   readonly USER_DESCRIPTION: BuildFormValidator
   readonly USER_TERMS: BuildFormValidator
-  readonly USER_RECAPTCHA: BuildFormValidator
 
   readonly USER_BAN_REASON: BuildFormValidator
 
@@ -33,15 +32,6 @@ export class UserValidatorsService {
         'minlength': this.i18n('Username must be at least 1 character long.'),
         'maxlength': this.i18n('Username cannot be more than 50 characters long.'),
         'pattern': this.i18n('Username should be lowercase alphanumeric; dots and underscores are allowed.')
-      }
-    }
-    
-    this.USER_RECAPTCHA = {
-      VALIDATORS: [
-        Validators.required
-      ],
-      MESSAGES: {
-        'required': this.i18n('Recaptcha is required.'),
       }
     }
 
