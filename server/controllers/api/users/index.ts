@@ -209,7 +209,7 @@ async function registerUser (req: express.Request, res: express.Response) {
 		});
 			
 		recaptcha.validate(body["g-recaptcha-response"]).then(function(){
-				
+			continu = true
 		}).catch(function(errorCodes){
 			// invalid
 			continu = false
@@ -219,7 +219,7 @@ async function registerUser (req: express.Request, res: express.Response) {
 	}
   }
   
-  if(continu || (res.locals.oauth.token && userHasPermission(UserRight.MANAGE_USERS))){ // Skip recaptcha if admin
+  if(continu || (res.locals.oauth && res.locals.oauth.token && userHasPermission(UserRight.MANAGE_USERS))){ // Skip recaptcha if admin
 
 	  const userToCreate = new UserModel({
 		username: body.username,
