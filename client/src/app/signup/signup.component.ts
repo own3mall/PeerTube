@@ -62,6 +62,7 @@ export class SignupComponent extends FormReactive implements OnInit {
     if(this.recaptchaRequired){
 		var s = document.createElement("script");
 		s.type = "text/javascript";
+		s.defer = true;
 		s.src = "https://www.google.com/recaptcha/api.js";
 		this.elementRef.nativeElement.appendChild(s);
 	}
