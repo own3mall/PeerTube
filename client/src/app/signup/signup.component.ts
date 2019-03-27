@@ -45,17 +45,17 @@ export class SignupComponent extends FormReactive implements OnInit {
   }
 
   ngOnInit () {
+	// Recaptcha vars
+    this.recaptchaRequired = this.requiresRecaptcha
+    this.recaptchaSiteKey = this.serverService.getConfig().recaptchaForm.recaptchaSiteKey
+    this.recaptchaSecretKey = this.serverService.getConfig().recaptchaForm.recaptchaSecretKey
+    
     this.buildForm({
       username: this.userValidatorsService.USER_USERNAME,
       password: this.userValidatorsService.USER_PASSWORD,
       email: this.userValidatorsService.USER_EMAIL,
       terms: this.userValidatorsService.USER_TERMS
     })
-    
-    // Recaptcha vars
-    this.recaptchaRequired = this.requiresRecaptcha
-    this.recaptchaSiteKey = this.serverService.getConfig().recaptchaForm.recaptchaSiteKey
-    this.recaptchaSecretKey = this.serverService.getConfig().recaptchaForm.recaptchaSecretKey
   }
   
   ngAfterViewInit() { // https://stackoverflow.com/questions/38088996/adding-script-tags-in-angular-component-template
