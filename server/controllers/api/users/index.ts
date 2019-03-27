@@ -11,6 +11,7 @@ import {
   asyncMiddleware,
   asyncRetryTransactionMiddleware,
   authenticate,
+  optionalAuthenticate,
   ensureUserHasRight,
   userHasPermission,
   ensureUserRegistrationAllowed,
@@ -111,6 +112,7 @@ usersRouter.post('/register',
   asyncMiddleware(ensureUserRegistrationAllowed),
   ensureUserRegistrationAllowedForIP,
   asyncMiddleware(usersRegisterValidator),
+  optionalAuthenticate,
   asyncRetryTransactionMiddleware(registerUser)
 )
 
