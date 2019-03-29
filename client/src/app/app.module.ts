@@ -1,4 +1,4 @@
-import { LOCALE_ID, NgModule, TRANSLATIONS, TRANSLATIONS_FORMAT } from '@angular/core'
+import { LOCALE_ID, NgModule, TRANSLATIONS, TRANSLATIONS_FORMAT, APP_INITIALIZER } from '@angular/core'
 import { BrowserModule } from '@angular/platform-browser'
 import { ServerService } from '@app/core'
 import { ResetPasswordModule } from '@app/reset-password'
@@ -32,7 +32,7 @@ export function metaFactory (serverService: ServerService): MetaLoader {
   })
 }
 
-export function loadConfig(config: ServerService): function{
+export function loadConfig(config: ServerService): Function{
 	return () => { return config.loadConfigPromise() };
 }
 
