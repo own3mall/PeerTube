@@ -128,6 +128,16 @@ export class ServerService {
           this.configLoaded.next(true)
         })
   }
+  
+  loadConfigPromise(): Promise<any> {
+    return this.http.get<ServerConfig>(ServerService.BASE_CONFIG_URL)
+        .pipe(tap(this.saveConfigLocally))
+        .subscribe(data => {
+          this.config = data
+
+          this.configLoaded.next(true)
+        })
+  }
 
   loadVideoCategories () {
     return this.loadAttributeEnum(ServerService.BASE_VIDEO_URL, 'categories', this.videoCategories, this.videoCategoriesLoaded, true)
