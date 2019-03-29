@@ -132,11 +132,11 @@ export class ServerService {
   loadConfigPromise(){
     return this.http.get<ServerConfig>(ServerService.BASE_CONFIG_URL)
         .pipe(tap(this.saveConfigLocally))
-        .toPromise(data => {
+        .toPromise().then(data => {
           this.config = data
 
           this.configLoaded.next(true)
-        }).then(function(){ console.log("config loaded"); }); // https://stackoverflow.com/questions/39033835/angularjs2-preload-server-configuration-before-the-application-starts
+        }); // https://stackoverflow.com/questions/39033835/angularjs2-preload-server-configuration-before-the-application-starts
   }
 
   loadVideoCategories () {
