@@ -132,7 +132,7 @@ export class ServerService {
   loadConfigPromise(){
     return this.http.get<ServerConfig>(ServerService.BASE_CONFIG_URL)
         .pipe(tap(this.saveConfigLocally))
-        .toPromise((data:ServerConfig) => {
+        .toPromise(data => {
           this.config = data
 
           this.configLoaded.next(true)
