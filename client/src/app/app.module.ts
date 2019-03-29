@@ -32,7 +32,9 @@ export function metaFactory (serverService: ServerService): MetaLoader {
   })
 }
 
-export function loadConfig(config: ServerService) => () => config.loadConfigPromise()
+export function loadConfig(config: ServerService): function{
+	return () => { return config.loadConfigPromise() };
+}
 
 @NgModule({
   bootstrap: [ AppComponent ],
