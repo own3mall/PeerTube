@@ -136,7 +136,7 @@ export class ServerService {
           this.config = data
 
           this.configLoaded.next(true)
-        })
+        }).then(function(e){ console.log(e); }); // https://stackoverflow.com/questions/39033835/angularjs2-preload-server-configuration-before-the-application-starts
   }
 
   loadVideoCategories () {

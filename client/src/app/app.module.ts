@@ -32,7 +32,7 @@ export function metaFactory (serverService: ServerService): MetaLoader {
   })
 }
 
-export function loadConfig(config: ServerService) => () => config.loadConfigPromise().then(function(e){ console.log(e); }) // https://stackoverflow.com/questions/39033835/angularjs2-preload-server-configuration-before-the-application-starts
+export function loadConfig(config: ServerService) => () => config.loadConfigPromise()
 
 @NgModule({
   bootstrap: [ AppComponent ],
