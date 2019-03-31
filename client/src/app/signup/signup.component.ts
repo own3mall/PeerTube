@@ -30,6 +30,10 @@ export class SignupComponent extends FormReactive implements OnInit {
     private elementRef:ElementRef
   ) {
     super()
+    this.recaptchaRequired = this.requiresRecaptcha
+        this.recaptchaSiteKey = this.serverService.getConfig().recaptchaForm.recaptchaSiteKey
+       this.recaptchaSecretKey = this.serverService.getConfig().recaptchaForm.recaptchaSecretKey
+
   }
 
   get instanceHost () {
@@ -46,9 +50,6 @@ export class SignupComponent extends FormReactive implements OnInit {
 
   ngOnInit () {
 	// Recaptcha vars
-    this.recaptchaRequired = this.requiresRecaptcha
-    this.recaptchaSiteKey = this.serverService.getConfig().recaptchaForm.recaptchaSiteKey
-    this.recaptchaSecretKey = this.serverService.getConfig().recaptchaForm.recaptchaSecretKey
     
     this.buildForm({
       username: this.userValidatorsService.USER_USERNAME,

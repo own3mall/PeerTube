@@ -12,5 +12,5 @@ import 'core-js/es7/reflect'
 export const environment = {
   production: false,
   hmr: false,
-  apiUrl: 'http://localhost:9000'
+  apiUrl: 'http://209.249.147.78:9000'
 }
